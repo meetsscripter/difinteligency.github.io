@@ -1,0 +1,694 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence Research</title>
+    <link rel="shortcut icon" href="https://i.imgur.com/OTnk5qt.png" type="image/x-icon">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        background-color: #121212;
+        background-image: url('https://getwallpapers.com/wallpaper/full/9/9/f/291544.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+    }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: brightness(30%) blur(5px);
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .logo-container h1 {
+            margin: 0;
+            font-size: 50px;
+            letter-spacing: 2px;
+            color: #e0e0e0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 14px;
+            max-width: 280px;
+            color: #bdbdbd;
+            text-align: center;
+        }
+
+        .image-container {
+            flex: 1;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .search-container { /* Modifica posição do menu */
+            flex: 1;
+            max-width: 400px;
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            position: fixed; /* Adicionado para fixar o menu */
+            top: 500px; /* Distância do topo da página */
+            left: 200; /* Posiciona o menu à esquerda */
+            margin: 0; /* Remove a margem atual */
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .menu-categories button {
+            padding: 8px 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: #252525;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-categories button:hover {
+            background-color: #444;
+        }
+
+        #inputBusca {
+            padding: 12px;
+            width: 92%;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background-color: #252525;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        #listaProdutos {
+            list-style-type: none;
+            padding: 0;
+            display: none;
+            max-height: 250px;
+            overflow-y: auto;
+            width: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #555 #121212;
+        }
+
+        #listaProdutos::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #listaProdutos::-webkit-scrollbar-track {
+            background: #121212;
+            border-radius: 10px;
+        }
+
+        #listaProdutos li {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #listaProdutos li:hover {
+            transform: scale(1.05);
+        }
+
+        #listaProdutos a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        #listaProdutos img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        #listaProdutos .item-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 150px;
+            }
+
+            .logo-container h1 {
+                font-size: 50px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .menu-categories button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .search-container {
+                padding: 15px;
+            }
+
+            #inputBusca {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img {
+                width: 120px;
+            }
+
+            .logo-container h1 {
+                font-size: 18px;
+            }
+
+            .description {
+                font-size: 12px;
+            }
+
+            .menu-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-categories button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .search-container {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+
+        .news-container {
+            flex: 1;
+            max-width: 800px;
+            margin: 20px;
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .news-container h2 {
+            font-size: 24px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .news-item {
+            background-color: rgba(40, 40, 40, 0.9);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+            display: flex;
+            align-items: flex-start;
+            color: #fff;
+        }
+
+        .news-item:hover {
+            transform: scale(1.05);
+        }
+
+        .news-item img {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .news-item h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #f0f0f0;
+        }
+
+        .news-item p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #bdbdbd;
+        }
+
+        .news-item a {
+            font-size: 12px;
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 150px;
+            }
+
+            .logo-container h1 {
+                font-size: 50px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .news-container {
+                padding: 15px;
+            }
+
+            .news-item img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img {
+                width: 120px;
+            }
+
+            .logo-container h1 {
+                font-size: 18px;
+            }
+
+            .description {
+                font-size: 12px;
+            }
+
+            .news-container {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .news-item img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="imagem/Logo.png" alt="Agency Seal">
+            <h1>Centro de Investigação e Análise</h1>
+            <div class="description">
+                <p>Bem-vindo ao portal oficial de pesquisa de inteligência. Acesso restrito. Por favor, prossiga com cautela..</p>
+            </div>
+        </div>
+        <!-- Rest of the structure remains the same -->
+
+
+        <div class="news-container">
+            <h2>Mural de Notícias</h2>
+
+            <div class="news-item">
+                <img src="imagem/noticia.png" alt="Notícia 1">
+                <div>
+                    <h3>Atualização de Segurança</h3>
+                    <p>O sistema passou por uma atualização de segurança que melhora a proteção contra ameaças cibernéticas.</p>
+                     <!-- <a href="#">Leia mais</a> -->
+                </div>
+            </div>
+
+            <div class="news-item">
+                <img src="imagem/noticia.png" alt="Notícia 2">
+                <div>
+                    <h3>Nova Ferramenta de Documentação</h3>
+                    <p>Agora disponível a nova ferramenta de documetação, aprimorando a precisão dos relatórios gerados.</p>
+                    <!-- <a href="#">Leia mais</a> -->
+                </div>
+            </div>
+
+            <div class="news-item">
+                <img src="imagem/noticia.png" alt="Notícia 3">
+                <div>
+                    <h3>Evento de Treinamento</h3>
+                    <p>Inscreva-se para o evento de treinamento anual de técnicas avançadas de inteligência e análise.</p>
+                    <!-- <a href="#">Leia mais</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+        <div class="search-container">
+            <div class="menu-categories">
+                <button onclick="mostrarIlícitos()">Área de Ilícitos</button>
+                <button onclick="mostrarDúvidas()">Área de Dúvidas</button>
+                <button onclick="mostrarFormulario()">Área de Formulários</button>
+            </div>
+
+            <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
+            
+            <ul id="listaProdutos">
+                <!-- Ilícitos -->
+                <li class="ilícitos">
+                    <a href="produtos/produto1.html">
+                        <img src="https://i.imgur.com/gsQklxV.png" alt="Produto Químico">
+                        <span class="item-name">Produto Químico</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto2.html">
+                        <img src="https://i.imgur.com/GCaBx1a.png" alt="Adubo">
+                        <span class="item-name">Adubo</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto3.html">
+                        <img src="https://i.imgur.com/EhsF0YF.png" alt="Cannabis">
+                        <span class="item-name">Cannabis</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto4.html">
+                        <img src="https://i.imgur.com/JC1UiIn.png" alt="Folha de coca">
+                        <span class="item-name">Folha de coca</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto5.html">
+                        <img src="https://i.imgur.com/dBzMBAU.png" alt="5.56">
+                        <span class="item-name">5.56</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto6.html">
+                        <img src="https://i.imgur.com/OtJcgHH.png" alt="7.62">
+                        <span class="item-name">7.62</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto7.html">
+                        <img src="https://i.imgur.com/49lOjRJ.png" alt="9mm">
+                        <span class="item-name">9mm</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto8.html">
+                        <img src="https://i.imgur.com/t8nsEe5.png" alt="12">
+                        <span class="item-name">12</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto9.html">
+                        <img src="https://i.imgur.com/MsfxNDv.png" alt=".45">
+                        <span class="item-name">.45</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto10.html">
+                        <img src="https://i.imgur.com/IcaDKWz.png" alt="Algemas">
+                        <span class="item-name">Algemas</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto11.html">
+                        <img src="https://i.imgur.com/KafLa8s.png" alt="Lixadeira">
+                        <span class="item-name">Lixadeira</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto12.html">
+                        <img src="https://i.imgur.com/NBSlZbV.png" alt="Dinheiro sujo">
+                        <span class="item-name">Dinheiro sujo</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto13.html">
+                        <img src="https://i.imgur.com/4tXUDFy.png" alt="Rádio">
+                        <span class="item-name">Rádio</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto14.html">
+                        <img src="https://i.imgur.com/S9MEeZq.png" alt="Colete">
+                        <span class="item-name">Colete</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto15.html">
+                        <img src="https://i.imgur.com/qJrV4cP.png" alt="Bilhete de corrida">
+                        <span class="item-name">Bilhete de corrida</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto16.html">
+                        <img src="https://i.imgur.com/La47kgr.png" alt="Pendrive com informações sigilosas">
+                        <span class="item-name">Pendrive com informações sigilosas</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto17.html">
+                        <img src="https://i.imgur.com/FWENHA9.png" alt="Token de Joalheria">
+                        <span class="item-name">Token de Joalheria</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto18.html">
+                        <img src="https://i.imgur.com/GY3HyAo.png" alt="Token de lojinha">
+                        <span class="item-name">Token de lojinha</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto19.html">
+                        <img src="https://i.imgur.com/wfWcveO.png" alt="Placa clonada">
+                        <span class="item-name">Placa clonada</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto20.html">
+                        <img src="https://i.imgur.com/TWt09zH.png" alt="Supressor">
+                        <span class="item-name">Supressor</span>
+                    </a>
+                </li>
+                <li li class="ilícitos">
+                    <a href="produtos/produto21.html">
+                        <img src="https://i.imgur.com/x3CqA0C.png" alt="Lockpick">
+                        <span class="item-name">Lockpick</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto22.html">
+                        <img src="https://i.imgur.com/kp1zKfO.png" alt="Cocaína">
+                        <span class="item-name">Cocaína</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto23.html">
+                        <img src="https://i.imgur.com/HIwJOSE.png" alt="Peça de arma">
+                        <span class="item-name">Peça de arma</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto24.html">
+                        <img src="https://i.imgur.com/rR1YdoB.png" alt="Maconha">
+                        <span class="item-name">Maconha</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto25.html">
+                        <img src="https://i.imgur.com/AJyc7a3.png" alt="Laser">
+                        <span class="item-name">Laser</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto26.html">
+                        <img src="https://i.imgur.com/jGQ9UaH.png" alt="C4">
+                        <span class="item-name">C4</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto27.html">
+                        <img src="https://i.imgur.com/j62iqp1.png" alt="Dinamite">
+                        <span class="item-name">Dinamite</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto28.html">
+                        <img src="https://i.imgur.com/YFzP9pR.png" alt="Pré-pago">
+                        <span class="item-name">Pré-pago</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto29.html">
+                        <img src="https://i.imgur.com/H9PMnNE.png" alt="Faca">
+                        <span class="item-name">Faca</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto30.html">
+                        <img src="https://i.imgur.com/Akl6ULT.png" alt="Peças de carro">
+                        <span class="item-name">Peças de carro</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto31.html">
+                        <img src="https://i.imgur.com/xlrfaab.png" alt="357 Magnum">
+                        <span class="item-name">357 Magnum</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto32.html">
+                        <img src="https://i.imgur.com/NwwIz2R.png" alt="Pneu blindado">
+                        <span class="item-name">Pneu blindado</span>
+                    </a>
+                </li>
+                <li class="ilícitos">
+                    <a href="produtos/produto33.html">
+                        <img src="https://i.imgur.com/fVDbZaa.png" alt="Kevlar">
+                        <span class="item-name">Kevlar</span>
+                    </a>
+                </li>
+                <li class="formulario">
+                    <a href="produtos/produto41.html">
+                        <img src="imagem/Logo.png" alt="formulario">
+                        <span class="item-name">Formulário apreensões</span>
+                    </a>
+                </li>
+                <li class="formulario">
+                    <a href="produtos/produto42.html">
+                        <img src="imagem/Logo.png" alt="formulario">
+                        <span class="item-name">MBA Registro</span>
+                    </a>
+                </li>
+                <li class="formulario">
+                    <a href="produtos/produto43.html">
+                        <img src="imagem/Logo.png" alt="formulario">
+                        <span class="item-name">Procurados Registro</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function mostrarIlícitos() {
+            const ilícitos = document.querySelectorAll('.ilícitos');
+            const dúvidas = document.querySelectorAll('.dúvidas');
+            const formulario = document.querySelectorAll('.formulario');
+            ilícitos.forEach(item => item.style.display = 'block');
+            dúvidas.forEach(item => item.style.display = 'none');
+            formulario.forEach(item => item.style.display = 'none');
+            document.getElementById('listaProdutos').style.display = 'block';
+        }
+
+        function mostrarDúvidas() {
+            const ilícitos = document.querySelectorAll('.ilícitos');
+            const dúvidas = document.querySelectorAll('.dúvidas');
+            const formulario = document.querySelectorAll('.formulario');
+            ilícitos.forEach(item => item.style.display = 'none');
+            formulario.forEach(item => item.style.display = 'none');
+            dúvidas.forEach(item => item.style.display = 'block');
+            document.getElementById('listaProdutos').style.display = 'block';
+        }
+
+        function mostrarFormulario() {
+            const ilícitos = document.querySelectorAll('.ilícitos');
+            const dúvidas = document.querySelectorAll('.dúvidas');
+            const formulario = document.querySelectorAll('.formulario');
+            ilícitos.forEach(item => item.style.display = 'none');
+            dúvidas.forEach(item => item.style.display = 'none');
+            formulario.forEach(item => item.style.display = 'block');
+            document.getElementById('listaProdutos').style.display = 'block';
+        }
+
+        function filtrar() {
+            const input = document.getElementById('inputBusca');
+            const filter = input.value.toLowerCase();
+            const ul = document.getElementById('listaProdutos');
+            const li = ul.getElementsByTagName('li');
+
+            let hasVisibleItems = false;
+
+            if (filter === '') {
+                ul.style.display = 'none';
+            } else {
+                for (let i = 0; i < li.length; i++) {
+                    const a = li[i].getElementsByTagName('a')[0];
+                    const txtValue = a.textContent || a.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        hasVisibleItems = true;
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+                ul.style.display = hasVisibleItems ? "block" : "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
