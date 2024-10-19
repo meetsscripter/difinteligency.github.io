@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Relatório</title>
+    <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a0a0a;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    background-image: url('../imagem/background.png'); /* Imagem de fundo do mapa */
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    width: 400px;
+    max-height: 90vh; /* Adicionando uma altura máxima */
+    overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
+}
+
+.container img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f4f4f4;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    color: #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.footer-text {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+
+#artigosChecklist label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espaçamento entre os itens */
+    cursor: pointer; /* Cursor pointer para indicar que é clicável */
+    font-size: 16px; /* Aumentei o tamanho da fonte */
+    color: #ddd; /* Cor mais suave para o texto */
+    transition: color 0.3s ease; /* Transição suave na cor ao passar o mouse */
+}
+
+#artigosChecklist label:hover {
+    color: #ffffff; /* Texto fica branco ao passar o mouse */
+}
+
+#artigosChecklist input[type="checkbox"] {
+    appearance: none; /* Remove o estilo padrão do checkbox */
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff; /* Borda azul */
+    border-radius: 4px; /* Bordas arredondadas */
+    margin-right: 10px; /* Espaço entre o checkbox e o texto */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#artigosChecklist input[type="checkbox"]:checked {
+    background-color: #007bff; /* Cor de fundo azul quando selecionado */
+    border-color: #0056b3; /* Cor da borda ao ser selecionado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Efeito de brilho ao selecionar */
+}
+
+#artigosChecklist input[type="checkbox"]:checked::before {
+    content: "✓"; /* Símbolo de "check" ao selecionar */
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+#artigosChecklist {
+    max-height: 300px; /* Aumentei a altura para dar mais espaço aos itens */
+    overflow-y: auto; /* Mantém a rolagem vertical */
+    margin-bottom: 25px; /* Aumentei o espaçamento inferior */
+    padding: 10px; /* Adicionei um pouco de padding para evitar que o conteúdo encoste nas bordas */
+    background-color: #2b2b2b; /* Cor de fundo para destacar o bloco do checklist */
+    border-radius: 8px; /* Arredondei as bordas */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6); /* Adicionei sombra interna para dar profundidade */
+    border: 1px solid #444; /* Borda sutil para delimitar a área */
+}
+
+.current-time {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Media Queries para Responsividade */
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Largura reduzida para telas menores */
+        padding: 20px; /* Menos padding em telas menores */
+    }
+
+    h1 {
+        font-size: 20px; /* Tamanho de fonte menor para cabeçalho */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        font-size: 14px; /* Tamanho de fonte menor para inputs */
+    }
+
+    button {
+        font-size: 14px; /* Tamanho de fonte menor para botões */
+    }
+
+    .back-button {
+        padding: 8px 16px; /* Menos padding para botões em telas menores */
+    }
+
+    .footer-text {
+        font-size: 10px; /* Tamanho de fonte menor para texto do rodapé */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px; /* Tamanho de fonte ainda menor */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        padding: 12px; /* Menos padding para inputs */
+        font-size: 12px; /* Tamanho de fonte ainda menor */
+    }
+
+    button {
+        font-size: 12px; /* Tamanho de fonte ainda menor para botões */
+    }
+
+    .back-button {
+        padding: 6px 12px; /* Menos padding para botões em telas muito pequenas */
+    }
+
+    .footer-text {
+        font-size: 8px; /* Tamanho de fonte muito menor para texto do rodapé */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../imagem/Logo.png" alt="CIA Logo">
+        <h1>LOGIN PORTAL</h1>
+
+        <!-- Botão Voltar -->
+        <a href="../index.html" class="back-button">Voltar para a página inicial</a>
+
+        <!-- Exibir Hora Atual -->
+        <div class="current-time" id="currentTime"></div>
+
+        <!-- Formulário de Login -->
+        <div id="loginForm">
+            <input type="text" id="login" placeholder="Digite seu ID de Agente" required>
+            <button id="loginButton">Entrar</button>
+            <p class="error-message" id="loginErrorMessage">Login ou senha inválidos.</p>
+        </div>
+
+        <p class="footer-text">Este é um sistema seguro do governo. O acesso não autorizado é proibido.</p>
+    </div>
+        <!-- Formulário de Relatório -->
+        <form id="reportForm" style="display:none;">
+
+            <label for="rg">RG do detido</label>
+            <input type="text" id="rg" name="rg" required>
+
+            <label for="detidoName">Nome do detido</label>
+            <input type="text" id="detidoName" name="detidoName" required>
+
+            <p class="footer-text">Este é um sistema seguro do governo. O acesso não autorizado é proibido.</p>
+
+            </select>
+
+            <label for="imageUpload">Enviar foto e de ilícitos caso tenha</label>
+            <input type="file" id="mediaUpload" name="mediaUpload" accept="image/*" multiple>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+        <p class="success-message" id="successMessage" style="display:none;">Relatório enviado com sucesso!</p>
+        <p class="error-message" id="errorMessage" style="display:none;">Falha ao enviar o relatório. Tente novamente.</p>
+    </div>
+    <div id="loading" style="display: none; text-align: center;">
+        <p>Carregando...</p>
+        <img src="loading.gif" alt="Loading..." style="width: 50px; height: 50px;" />
+    </div>
+
+    <script>
+        const form = document.getElementById('reportForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+        const loginErrorMessage = document.getElementById('loginErrorMessage');
+        const currentTimeElement = document.getElementById('currentTime');
+
+
+        const users = {
+            '1': { nome: '<@A definir>' }, // Jason
+
+            // ...restante dos usuários...
+        };
+
+      
+        let userName = '';
+        loginButton.addEventListener('click', function() {
+            const login = document.getElementById('login').value;
+
+            if (users[login]) {
+                userName = users[login].nome;
+                loginForm.style.display = 'none';
+                form.style.display = 'block';
+                loginErrorMessage.style.display = 'none';
+                window.scrollTo(0, 0); // Garante que o formulário comece do topo da página
+            } else {
+                loginErrorMessage.style.display = 'block';
+            }
+        });
+
+
+
+        form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Exibe a animação de carregamento
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block'; // Mostra o carregando
+    successMessage.style.display = 'none'; // Esconde a mensagem de sucesso
+    const now = new Date();
+    const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' }; // Formato da data: dia/mês/ano
+    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // Formato da hora: 24h
+    const currentTime = `${now.toLocaleDateString('pt-BR', optionsDate)} - ${now.toLocaleTimeString('pt-BR', optionsTime)}`;
+
+
+    const rg = document.getElementById('rg').value;
+    const detidoName = document.getElementById('detidoName').value;
+    const imageFiles = document.getElementById('mediaUpload').files;
+
+
+    const webhookURL = "https://discord.com/api/webhooks/1296976568408866907/umiIJPdpuzTJ3T_3Ra5AEoTq5YIYGkcOmwumLHDKSz0g9yZAQJIWKVaoNoOh1e7vxVoR";
+
+    const formData = new FormData();
+    formData.append('content', `# ${detidoName}(${rg}) realizado em ${currentTime}
+
+📇 Registrado pelo(a) investigador(a) ${userName} com provas em anexo!`);
+
+    for (let i = 0; i < imageFiles.length; i++) {
+        formData.append(`file${i}`, imageFiles[i]);
+    }
+
+    try {
+        const response = await fetch(webhookURL, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            loading.style.display = 'none'; // Esconde a animação de carregamento
+            successMessage.style.display = 'block'; // Mostra a mensagem de sucesso
+            form.reset();
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 2000);
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    } catch (error) {
+        errorMessage.style.display = 'block';
+    }
+});
+
+function updateTime() {
+    const now = new Date();
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' }; // Formato da data: dia/mês/ano
+    const dateString = now.toLocaleDateString('pt-BR', options); // Converte a data para o formato brasileiro
+    const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }); // Hora no formato 24h
+    currentTimeElement.textContent = `Data Atual: ${dateString} - Hora Atual: ${timeString}`; // Exibe data e hora
+}
+
+        setInterval(updateTime, 1000); // Atualiza a hora a cada segundo
+
+    </script>
+</body>
+</html>
